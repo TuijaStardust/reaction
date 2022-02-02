@@ -1,25 +1,20 @@
 import logo from './logo.svg';
 import './App.css';
 
-function App() {
+// Defining variables: I a variable doesn't need anything from within the function component's body
+// (e.g. parameters), define it outside the component to avoid redefining it on every function call
+const awesomeVariable = 'Awesome';
+
+// Function components are the modern way of using components in React
+const App = () => {
+  const inTheFunctionVariable = '(Do we really need to run this all the time)'
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div>
+    <h1>Hello Hello Oh World! {inTheFunctionVariable}</h1>
     </div>
-  );
+  );  
+    
 }
 
 export default App;

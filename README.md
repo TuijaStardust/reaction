@@ -5,6 +5,18 @@ It's been about three years since last time I was training react. It's about tim
 This project was created with create-react-app, manual included... 
 
 
+### Useful to remember:
+
+- package.json -> A list of node package dependencies and project config ('The node package shopping list')
+- package-lock.json -> No need to touch this one
+- public/ -> folder that holds development files. The index file is displayed on localhost:3000 during development
+- src/ -> All the javascript handled by index.html
+
+- src/App.js implements React application made of components
+
+- Project-specific commands: package.json -> under "scripts" property
+
+
 
 ## Getting Started with Create React App
 
@@ -39,7 +51,7 @@ See the section about [deployment](https://facebook.github.io/create-react-app/d
 
 ### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+**Note: this is a one-way operation. Once you `eject`, you can't go back!**2
 
 If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
