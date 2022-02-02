@@ -1,4 +1,12 @@
-# Getting Started with Create React App
+# Reacting
+
+It's been about three years since last time I was training react. It's about time to refresh the skill and make it a useful one.
+
+This project was created with create-react-app, manual included... 
+
+
+
+## Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
 
