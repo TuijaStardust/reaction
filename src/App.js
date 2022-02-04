@@ -13,7 +13,7 @@ const welcome = {
 const getTitle = (title) => title;
 
 // Data is usually fetched from a remote API in a list mode
-const list = [
+/* const list = [
   {  
     objectID: 0, //identifier
     title: 'Pajutuija',
@@ -23,7 +23,7 @@ const list = [
     points: 3, // popularity...
   },
   {
-    ojectID: '1',
+    objectID: '1',
     title: 'Sydämelle',
     url: 'https://sydamelle.com',
     author: 'Marjaana',
@@ -31,10 +31,31 @@ const list = [
     points: 2
   }
 ]
+ */
 
 // Function components are the modern way of using components in React
 const App = () => {
   const inTheFunctionVariable = '(Do we really need to run this all the time)'
+
+  const sites = [
+    {  
+      objectID: 0, //identifier
+      title: 'Pajutuija',
+      url: 'https://pajutuija.fi',
+      author: 'Tuija Paju',
+      num_comments: 4,
+      points: 3, // popularity...
+    },
+    {
+      objectID: '1',
+      title: 'Sydämelle',
+      url: 'https://sydamelle.com',
+      author: 'Marjaana',
+      num_comments: '5',
+      points: 2
+    }
+  ]
+  
 
   return (
     <div>
@@ -48,44 +69,64 @@ const App = () => {
       <Search />
 
       <ul>
-      {list.map(function (item) {
-        return <li>{item.title}</li>
+      {sites.map(function (item) {
+        return <li key={item.title}>{item.title}</li>
       })}
       </ul>
       
-      <List />
+      <Lost list={sites}/>
       </div>
   );  
 }
     
 // Create another component that can be used in the Application
-const List = () => (
-  <ul>        
-    {list.map((item) => {
-      return (
+const Lost = (props) => (
+  <div>
+    <ul>        
+    {props.list.map((item) => (
+      <Item key={item.objectID} item={item} />
+    ))}
+    </ul>
+    <hr/>
+    <ul>
+      {props.list.map((item) => (
+        <Unicorn key={item.objectID} teddybear={item} />
+      ))}
+    </ul>
+  </div>
+)  
+      
+const Item = (props) => (
         
-        <li key={item.objectID}>{item.author}<br/>
-        <span>
-        URL: <a href={item.url}>{item.title}</a>
-        </span><br/>
-        <span>Author: {item.author}</span><br/>
-        <span>Comments: {item.num_comments}</span><br/>
-        <span>Rating: {item.points}</span>
-        </li>          
-      )        
-    })}
-  </ul>
+  <li key={props.item.objectID}>{props.item.author}<br/>
+    <span>
+      URL: <a href={props.item.url}>{props.item.title}</a>
+    </span><br/>
+    <span>Author: {props.item.author}</span><br/>
+    <span>Comments: {props.item.num_comments}</span><br/>
+    <span>Rating: {props.item.points}</span>
+  </li>          
+) 
+
+const Unicorn = (props) => (
+  <li>
+    <h3>{props.teddybear.title}</h3>
+  </li>
 )
+
 
         
 // Search component
-const Search = () => (
+const Search = () => {
+  const handleChange = (event) => console.log(event.target.value) 
+
+  return (
     <div>
       <label htmlFor="search">Search: </label>
-      <input id="search" type="text" />
+      <input id="search" type="text" onChange={handleChange} />
     </div>
-)
-
+  )
+}
 
 export default App;
 
