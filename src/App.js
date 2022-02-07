@@ -1,3 +1,5 @@
+import * as React from 'react';
+import ReactDom from 'react-dom';
 import './App.css';
 
 // Defining variables: I a variable doesn't need anything from within the function component's body
@@ -56,6 +58,9 @@ const App = () => {
     }
   ]
   
+  const handleSearch = (event) => {
+    console.log(event.target.value)
+  }
 
   return (
     <div>
@@ -66,7 +71,7 @@ const App = () => {
     
       <hr />
       
-      <Search />
+      <Search onSearch={handleSearch} />
 
       <ul>
       {sites.map(function (item) {
@@ -117,14 +122,29 @@ const Unicorn = (props) => (
 
         
 // Search component
-const Search = () => {
-  const handleChange = (event) => console.log(event.target.value) 
-
+const Search = (props) => {
+  // Initial state
+  // first argument: this state will change
+  // second argument: function to update the state 
+  const [searchTerm, setSearchTerm] = React.useState('')
+ 
+  const handleChange = (event) => {
+    // update state
+    setSearchTerm(event.target.value)
+    // callback function
+    props.onSearch(event)
+  }  
+  
   return (
     <div>
       <label htmlFor="search">Search: </label>
       <input id="search" type="text" onChange={handleChange} />
+    
+      <p>
+        Searching for <strong>{searchTerm}</strong>
+      </p>
     </div>
+
   )
 }
 

@@ -87,3 +87,30 @@ const list = [
 
 - Everything we pass from a parent component to a child component via a component element's HTML attribute can e accessed in the child component.
 - The child component receives an object parameter - props - which includes all the passed attributes as properties (props).
+
+## States
+
+- State is used to make applications interactive - state is used to alter information over time
+- useState() function tells React that X is a state that changes over time and whenever it changes, React has to re-render (= run component function again) its affected component(s) -> the updateted state becomes the current state
+- useState() is a React Hook...
+
+const Search = () => {
+  const [searchTerm, setSearchTerm] = React.useState('')
+  const handleChange = (event) => {
+    setSearchTerm(event.target.value)
+  }
+}
+
+- -> useState() takes an initial state as an argument. ('') By providin initial state we tell React this state changes
+- -> Calling setState() returns an array with two entries:
+  - searchTerm => current state
+  - setSearchTerm => function to update this state ("state updater function") 
+
+## Callback Handlers in JSX
+
+- Callback Handler is a callback function that is introduced in one place, is used elsewhere but "calls back" to the place it was introduced
+- When an (event) handler is passed as props from a parent component to its child component, it becomes a callback handler
+- Callback handlers passed as functions in props can be used to communicate up the component hierarchy
+
+- Pass a function from a parent component (App) to a child component (Search) via props
+- -> call this function in the child component (Search), but have the actual implementation of the called function in the parent component (App)
