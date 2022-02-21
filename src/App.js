@@ -58,9 +58,19 @@ const App = () => {
     }
   ]
   
+  // Initial state
+  // first argument: this state will change
+  // second argument: function to update the state 
+  const [searchTerm, setSearchTerm] = React.useState('Unicorn')
+ 
   const handleSearch = (event) => {
-    console.log(event.target.value)
+    setSearchTerm(event.target.value)
   }
+
+  const searchedSites = sites.filter((site) => 
+   // always use loverCase versions when comparing text!!!
+    site.title.toLowerCase().includes(searchTerm.toLowerCase())
+  )
 
   return (
     <div>
@@ -68,21 +78,33 @@ const App = () => {
       <h2>Or maybe just {welcome.greeting} {welcome.title}</h2>
       <h3>Go get the title: {getTitle('Clown')}</h3>
       <p>{awesomeVariable}</p>
-    
+      <p>Search term: {searchTerm}</p>
       <hr />
       
-      <Search onSearch={handleSearch} />
-
-      <ul>
-      {sites.map(function (item) {
-        return <li key={item.title}>{item.title}</li>
-      })}
-      </ul>
+      <Search search={searchTerm} onSearch={handleSearch} gummybear={searchTerm} />
       
-      <Lost list={sites}/>
+      <Lost list={searchedSites} />
       </div>
   );  
 }
+
+// Search component
+// Use search term from input field to filter sites by title in the App component
+// Share Search component's state accross multiple components -> List state up to App component
+// -> Search comp. passes up the event to App comp. via callback handler
+const Search = (props) => (
+    <div>
+      <label htmlFor="search">Search: </label>
+      <input 
+        id="search" 
+        type="text"
+        value={props.search}
+        onChange={props.onSearch} 
+      /> 
+      <p>See how the state changes: <strong>{props.gummybear}</strong></p>
+      <p>It is passed down as props. Input field content is thrown up to the state handler using a callback function</p>   
+    </div>
+)
     
 // Create another component that can be used in the Application
 const Lost = (props) => (
@@ -91,12 +113,6 @@ const Lost = (props) => (
     {props.list.map((item) => (
       <Item key={item.objectID} item={item} />
     ))}
-    </ul>
-    <hr/>
-    <ul>
-      {props.list.map((item) => (
-        <Unicorn key={item.objectID} teddybear={item} />
-      ))}
     </ul>
   </div>
 )  
@@ -119,34 +135,6 @@ const Unicorn = (props) => (
   </li>
 )
 
-
-        
-// Search component
-const Search = (props) => {
-  // Initial state
-  // first argument: this state will change
-  // second argument: function to update the state 
-  const [searchTerm, setSearchTerm] = React.useState('')
- 
-  const handleChange = (event) => {
-    // update state
-    setSearchTerm(event.target.value)
-    // callback function
-    props.onSearch(event)
-  }  
-  
-  return (
-    <div>
-      <label htmlFor="search">Search: </label>
-      <input id="search" type="text" onChange={handleChange} />
-    
-      <p>
-        Searching for <strong>{searchTerm}</strong>
-      </p>
-    </div>
-
-  )
-}
 
 export default App;
 

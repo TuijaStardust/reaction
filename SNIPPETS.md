@@ -114,3 +114,25 @@ const Search = () => {
 
 - Pass a function from a parent component (App) to a child component (Search) via props
 - -> call this function in the child component (Search), but have the actual implementation of the called function in the parent component (App)
+
+## Lifting state
+
+- Always manage state at a component lever where every component that's interested in it is one that either:
+  - manages the state - using information directly from state
+  - component below the managing component - using information from props 
+- If a component below needs to update the state, pass a callback handler down to the component which allows the callback handler to update the state.
+- If a component needs to use the state, pass it down as props
+
+## React Controlled Components
+- Input field can hold a internal state before givin external value to it
+- If we want to start with the initial state in the input field, we need to convert the component with the input field into a so called controlled component
+- Pass initial state using props and use it with value attribute in input field -> Now the input field uses the correct initial value when displaying in the browser
+
+### Unidirectional data flow
+- A React application and its components start with an initial state. It can be passed down as props to child components. It's rendered on first use.
+- When side-effect occurs (user input) or data loading from a remote API, the change is captured in React's state either in the component or by notifying parent components via a callback handler
+- Once state has been changed, all components below the component with the modified state are re-rendered (component functions run again)
+
+
+- Hooks initialize only once when the component renders for the first time, after which React tracks them internally with their most recent values.
+
